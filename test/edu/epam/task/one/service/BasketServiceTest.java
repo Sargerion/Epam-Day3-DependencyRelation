@@ -7,7 +7,6 @@ import edu.epam.task.one.util.BallsReader;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -24,24 +23,12 @@ public class BasketServiceTest {
     private static List<Ball> balls;
     private static Basket basket;
     private static BasketService basketService;
+    
     @BeforeClass
-    public static void initBasketService() {
+    public static void initialize() throws IOException{
         basketService = new BasketService();
-    }
-
-    @BeforeClass
-    public static void initBallsReader() {
         ballsReader = new BallsReader();
-    }
-
-    @BeforeClass
-    public static void initBalls() throws IOException{
-        initBallsReader();
         balls = ballsReader.readBallsInfoFromFile(FILE_PATH);
-    }
-
-    @BeforeClass
-    public static void initBasket() {
         basket = new Basket(balls);
     }
 
@@ -60,22 +47,10 @@ public class BasketServiceTest {
     }
 
     @AfterClass
-    public static void clearBalls() {
+    public static void clear() {
         balls = null;
-    }
-
-    @AfterClass
-    public static void clearBasket() {
         basket = null;
-    }
-
-    @AfterClass
-    public static void clearBallsReader() {
         ballsReader = null;
-    }
-
-    @AfterClass
-    public static void clearBasketService() {
         basketService = null;
     }
 }
